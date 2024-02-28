@@ -1,6 +1,9 @@
 // import {useRef, useEffect, useState} from 'react';
 import React, {useEffect} from 'react';
+import {browser} from 'webextension-polyfill-ts';
 import {onApiLogin} from '../api/authApi';
+import {setToken} from '../api/common';
+import {configApi} from '../api/config';
 import UserContext from './UserContext';
 
 export default function FormLogin() {
@@ -26,6 +29,7 @@ export default function FormLogin() {
         user: res.user,
         token: res.token.accessToken
       };
+      setToken(currentData.token);
       localStorage.setItem("USER_INFO", JSON.stringify(currentData));
       setUserData(currentData);
     }
@@ -75,6 +79,16 @@ export default function FormLogin() {
               {!!messError && <div style={{color: 'red'}}>
                 {messError}
               </div>}
+            </div>
+            <div style={{display: 'flex', justifyContent: 'right'}}>
+              <p style={{cursor: 'pointer', width: 'fit-content'}}
+                onClick={() => {
+                  browser.tabs.create({
+                    url: configApi.domainWeb,
+                    active: true,
+                  });
+                }}
+              >Forgot password!</p>
             </div>
             <button type="submit" className='btnLogin'
               onClick={onLogin}
