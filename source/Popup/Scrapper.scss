@@ -1,0 +1,29 @@
+@import "../styles/fonts";
+@import "../styles/reset";
+@import "../styles/variables";
+
+#scapp {
+  min-width: 350px;
+  padding: 30px 20px;
+  min-height: 300px;
+  display: flex;
+  .bnLogout {
+    position: absolute;
+    right: 10px;
+    background-color: rgb(223, 221, 219);
+    padding: 10px;
+    border-radius: 4px;
+  }
+  .bnSync {
+    background-color: #F66631;
+    padding: 10px;
+    border-radius: 4px;
+    color: white
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}

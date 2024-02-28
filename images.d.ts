@@ -1,0 +1,1 @@
+declare module "*.png"; // Add other image formats if needed
