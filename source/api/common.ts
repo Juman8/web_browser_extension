@@ -50,8 +50,27 @@ export const UpdateRecipeRequestV2 = async (id: string | number, body: any): Pro
     },
     body: JSON.stringify(body),
   }).then(data => data.json()).then(d => {
-    console.log({d});
     return d;
+  }).catch(() => {
+    return '';
+  });
+};
+
+export const onCheckScrapperUrl = async (url: string): Promise<any> => {
+  const fullUrl = configApi.baseUrl + ROUTE_API.checkScrapperUrl;
+  return fetch(fullUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer ' + token,
+    },
+    body: JSON.stringify({urlScrape: url}),
+  }).then(data => data.json()).then(d => {
+    console.log({d});
+    return {
+      isAlready: d?.data?.isScraped,
+      idRecipe: d?.data?.recipeId,
+    };
   }).catch(() => {
     return '';
   });

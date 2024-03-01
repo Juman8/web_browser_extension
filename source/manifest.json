@@ -11,12 +11,12 @@
       "48": "assets/icons/favicon-48.png",
       "128": "assets/icons/favicon-128.png"
     },
-    "default_title": "tiny title"
+    "default_title": "MenuWise Scraper Extension"
   },
 
   "description": "MenuWise scrapper Extension",
   "homepage_url": "https://menuwise.com",
-  "short_name": "Sample Name",
+  "short_name": "MenuWise Extension",
 
   "permissions": [
     "activeTab",

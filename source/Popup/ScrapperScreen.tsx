@@ -5,7 +5,7 @@ import {onApiLogout} from '../api/authApi';
 import {browser} from 'webextension-polyfill-ts';
 import {onApiScrapUrl} from '../api/scraperApi';
 import {changeArrayMethodToStringMethod, formatExtractLinev2, getNumberFromString} from '../utils/common';
-import {AddManyRecipeLineRequest, getToken, onCreateARecipe, setToken, UpdateRecipeRequestV2} from '../api/common';
+import {AddManyRecipeLineRequest, getToken, onCheckScrapperUrl, onCreateARecipe, setToken, UpdateRecipeRequestV2} from '../api/common';
 import {configApi} from '../api/config';
 export const ScrapperScreen = () => {
   const {setUserData} = React.useContext(UserContext);
@@ -15,23 +15,30 @@ export const ScrapperScreen = () => {
   const onLogout = () => {
     localStorage.removeItem('USER_INFO');
     setUserData('');
-    onApiLogout();
     setToken('');
+    onApiLogout();
   };
 
-  const onShowMessAndHide = (recipeName: string, idRecipe: string) => {
-    const text = `${recipeName} saved!`;
+  const onShowMessAndHide = (recipeName: string, idRecipe: string, prefix: 'saved!' | 'is already imported!') => {
+    return;
+    const text = `${recipeName} ` + prefix;
     if (confirm(text)) {
       const url = configApi.domainWeb + idRecipe + '?token=' + getToken();
-      // browser.tabs.hide()
       browser.tabs.create({
         url: url,
         active: true,
       });
+    } else {
+      browser.runtime.reload();
     }
   };
 
   const onSyncDataRecipe = async (dataScrapper: any, recipeSource: string) => {
+    const dataCheck = await onCheckScrapperUrl(recipeSource);
+    if (dataCheck?.isAlready) {
+      onShowMessAndHide(dataScrapper.name, dataCheck?.idRecipe, 'is already imported!');
+      return;
+    }
     const RecipeLineBody = formatExtractLinev2(dataScrapper.ingredients, 0);
 
     // Create recipe
@@ -53,7 +60,7 @@ export const ScrapperScreen = () => {
       await AddManyRecipeLineRequest(idRecipe, {recipeLines: RecipeLineBody});
       // update info recipe
       await UpdateRecipeRequestV2(idRecipe, body);
-      onShowMessAndHide(dataScrapper.name, idRecipe);
+      onShowMessAndHide(dataScrapper.name, idRecipe, 'saved!');
       setIsLoading(false);
     } else {
       setErr(true);
@@ -85,6 +92,10 @@ export const ScrapperScreen = () => {
       }
     });
   };
+
+  React.useEffect(() => {
+    onClickScapper();
+  }, []);
 
   return (
     <div style={{

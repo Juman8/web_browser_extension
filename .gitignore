@@ -76,11 +76,9 @@ fabric.properties
 
 ### WebStorm+all Patch ###
 # Ignores the whole .idea folder and all .iml files
-# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
 
 .idea/
 
-# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
 
 *.iml
 modules.xml
@@ -90,7 +88,6 @@ modules.xml
 # Sonarlint plugin
 .idea/sonarlint
 
-# End of https://www.toptal.com/developers/gitignore/api/webstorm+all
 
 ### Node ###
 # Logs
@@ -120,7 +117,6 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
 # Bower dependency directory (https://bower.io/)
@@ -170,7 +166,7 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# react / gatsby 
+# react / gatsby
 public/
 
 # vuepress build output
@@ -197,7 +193,6 @@ dist/
 .awcache
 
 # yarn 2
-# https://github.com/yarnpkg/berry/issues/454#issuecomment-530312089
 .yarn/*
 !.yarn/releases
 !.yarn/plugins
