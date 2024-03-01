@@ -20,7 +20,6 @@ export const ScrapperScreen = () => {
   };
 
   const onShowMessAndHide = (recipeName: string, idRecipe: string, prefix: 'saved!' | 'is already imported!') => {
-    return;
     const text = `${recipeName} ` + prefix;
     if (confirm(text)) {
       const url = configApi.domainWeb + idRecipe + '?token=' + getToken();
