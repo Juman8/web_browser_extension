@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "MenuWise Extension",
+  "name": "MenuWise",
   "version": "0.0.0",
 
   "action": {
@@ -14,9 +14,9 @@
     "default_title": "MenuWise Scraper Extension"
   },
 
-  "description": "MenuWise scrapper Extension",
+  "description": "MenuWise scraper Extension",
   "homepage_url": "https://menuwise.com",
-  "short_name": "MenuWise Extension",
+  "short_name": "MenuWise",
 
   "permissions": [
     "activeTab",

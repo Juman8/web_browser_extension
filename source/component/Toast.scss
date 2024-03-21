@@ -1,0 +1,24 @@
+.toast {
+  position: fixed;
+  left: 50%;
+  background-color: #333;
+  color: #fff;
+  border-radius: 8px;
+  z-index: 1000;
+  bottom: 0px;
+  transform: translate(-50%, 0%);
+  transition: bottom 0.5s ease-in-out; // Thêm hiệu ứng di chuyển cho thuộc tính bottom
+  text-align: center;
+  padding: 10px 10px 10px 10px;
+}
+
+.toast-hidden {
+  bottom: -60px; // Ẩn toast bằng cách đặt vị trí bottom ra ngoài màn hình
+}
+
+.toast-show {
+  bottom: 30px; // Ẩn toast bằng cách đặt vị trí bottom ra ngoài màn hình
+}
+.cursorPointer {
+  cursor: pointer;
+}

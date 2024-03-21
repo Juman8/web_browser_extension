@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import {setToken} from '../api/common';
 import FormLogin from './FormLogin';
@@ -5,18 +7,19 @@ import {ScrapperScreen} from './ScrapperScreen';
 
 import './styles.scss';
 import UserContext from './UserContext';
-
+import Toast from '../component/Toast';
+import {ToastService} from '../component/ToastService';
 
 const Popup: React.FC = () => {
   const {dataUser, setUserData} = React.useContext(UserContext) as any;
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const getToken = async () => {
+  const getToken = async (): Promise<void> => {
     const data = await localStorage.getItem('USER_INFO');
     if (data) {
-      const _dataUser = JSON.parse(data);
-      setToken(_dataUser.token);
-      setUserData(_dataUser);
+      const newDataUser = JSON.parse(data);
+      setToken(newDataUser.token);
+      setUserData(newDataUser);
     }
     setIsLoading(false);
   };
@@ -30,14 +33,18 @@ const Popup: React.FC = () => {
   }
   if (dataUser?.token) {
     return (
-      <ScrapperScreen />
+      <>
+        <ScrapperScreen />
+        <Toast ref={ToastService.refToast} />
+      </>
     );
   }
 
   return (
     <>
-      <section id="popup" >
+      <section id="popup">
         <FormLogin />
+        <Toast ref={ToastService.refToast} />
       </section>
     </>
   );
