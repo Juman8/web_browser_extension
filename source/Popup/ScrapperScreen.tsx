@@ -138,7 +138,7 @@ export const ScrapperScreen = (): any => {
   }, []);
 
   return (
-    <div style={{}} id="scraper">
+    <div style={{}} id="scapp">
       <button
         className="bnLogout"
         onClick={() => {
